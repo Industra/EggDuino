@@ -3,12 +3,18 @@ Eggduino
 
 Arduino Firmware for Eggbot / Spherebot with Inkscape-Integration
 
-Version 1.6a
+Version 1.6a (Industra Lab edition)
 tested with Inkscape Portable 0.91, Eggbot Extension and patched eggbot.py
 
 Regards: Eggduino-Firmware by Joachim Cerny, 2015
 
 Thanks for the nice libs ACCELSTEPPER and SERIALCOMMAND, which made this project much easier. Thanks to the Eggbot-Team for such a funny and enjoyable concept! Thanks to my wife and my daughter for their patience. :-)
+
+
+Industra Lab edition modifications by Ondrej Pistek, 2017:
+- modification of code for Arduino 1.6.9
+- save of configured pen position to eeprom in setup
+- configure microsteping regarding to Industra Eggbot kit PCB with drv8825 drivers
 
 Features:
 

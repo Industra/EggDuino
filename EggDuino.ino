@@ -27,17 +27,17 @@
 
 #define initSting "EBBv13_and_above Protocol emulated by Eggduino-Firmware V1.6a"
 //Rotational Stepper:
-#define step1 11
-#define dir1 10
-#define enableRotMotor 9
+#define step1 3
+#define dir1 2
+#define enableRotMotor 10
 #define rotMicrostep 16  //MicrostepMode, only 1,2,4,8,16 allowed, because of Integer-Math in this Sketch
 //Pen Stepper:
-#define step2 8
-#define dir2 7
-#define enablePenMotor 6
+#define step2 5
+#define dir2 4
+#define enablePenMotor 9
 #define penMicrostep 16 //MicrostepMode, only 1,2,4,8,16 allowed, because of Integer-Math in this Sketch
 
-#define servoPin 3 //Servo
+#define servoPin A0 //Servo
 
 // EXTRAFEATURES - UNCOMMENT TO USE THEM -------------------------------------------------------------------
 
@@ -68,8 +68,8 @@ SerialCommand SCmd;
 // Variables... be careful, by messing around here, everything has a reason and crossrelations...
 int penMin=0;
 int penMax=0;
-int penUpPos=5;  //can be overwritten from EBB-Command SC
-int penDownPos=20; //can be overwritten from EBB-Command SC
+int penUpPos=30;  //can be overwritten from EBB-Command SC
+int penDownPos=35; //can be overwritten from EBB-Command SC
 int servoRateUp=0; //from EBB-Protocol not implemented on machine-side
 int servoRateDown=0; //from EBB-Protocol not implemented on machine-side
 long rotStepError=0;
@@ -84,7 +84,17 @@ float rotSpeed=0;
 float penSpeed=0; // these are local variables for Function SteppermotorMove-Command, but for performance-reasons it will be initialized here
 boolean motorsEnabled = 0;
 
-void setup() {   
+void setup() {
+  storePenUpPosInEE();
+  storePenDownPosInEE();
+  pinMode(17, OUTPUT); 
+    pinMode(8, OUTPUT); 
+    pinMode(7, OUTPUT); 
+    pinMode(6, OUTPUT); 
+    digitalWrite(17,1); //driver logic power
+    digitalWrite(8,0); // M0 microsteps
+    digitalWrite(7,0); // M1 microsteps
+    digitalWrite(6,1); // M2 microsteps   
 	Serial.begin(9600);
 	makeComInterface();
 	initHardware();
